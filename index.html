@@ -1,12 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>무비티아이</title>
+
+    <script>
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMzdiOTAwZTE1YzUyZGU5ZDI4ZmFkZGYwNjNlNDg4NSIsInN1YiI6IjY1MmYzNmJmYTgwMjM2MDBhYjQwY2M1YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zLs09Telgn6NzSSZwcHnFbxIlpzVFdij9j9IhEnAJUU'
+            }
+        };
+
+        fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    </script>
+
 </head>
+
 <body>
-    
+
+    <header>
+        <h1>무비티아이</h1>
+        <h4>INFP의 최애픽은 뭘까?</h4>
+        <h4>MBTI 별로 선호하는 영화 랭킹은?</h4>
+    </header>
+
+    <form class="searchbox"> <!--서치박스 코드 시작-->
+        <label>영화 찾기 : </label>
+        <input type="text" id="search-input" placeholder="원하는 영화 제목을 검색하세요.">
+        <button type="submit" id="search-btn">검색</button>
+    </form> <!--서치박스 코드 끝-->
+
+    <section class="card-list"> <!--카드리스트 섹션 코드 시작-->
+        <div class="movie-card">
+            <img src="https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="The Godfather">
+            <h2 class="movie-title">The Godfather</h2>
+            <p>
+                about movie
+            </p>
+            <p>
+                MBTI Pick!
+            </p>
+            <h3>rating</h3>
+        </div>
+        <div class="movie-card">
+            <img src="..." alt="">
+            <h2 class="movie-title">movie title</h2>
+            <p>
+                about movie
+            </p>
+            <p class="text-pick">
+                MBTI Pick!
+            </p>
+            <h3>rating</h3>
+        </div>
+        <div class="movie-card">
+            <img src="..." alt="">
+            <h2 class="movie-title">movie title</h2>
+            <p>
+                about movie
+            </p>
+            <p class="text-pick">
+                MBTI Pick!
+            </p>
+            <h3>rating</h3>
+        </div>
+        <div class="movie-card">
+            <img src="..." alt="">
+            <h2 class="movie-title">movie title</h2>
+            <p>
+                about movie
+            </p>
+            <p class="text-pick">
+                MBTI Pick!
+            </p>
+            <h3>rating</h3>
+        </div>
+        <div class="movie-card">
+            <img src="..." alt="">
+            <h2 class="movie-title">movie title</h2>
+            <p>
+                about movie
+            </p>
+            <p class="text-pick">
+                MBTI Pick!
+            </p>
+            <h3>rating</h3>
+        </div>
+    </section> <!--카드리스트 섹션 코드 끝-->
+
 </body>
+
 </html>
