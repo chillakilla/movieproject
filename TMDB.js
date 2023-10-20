@@ -16,6 +16,12 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', opti
 
         const movies = response.results;
 
+        const movielist = [];
+
+        movielist = results;
+
+
+
         let temp_html = '';
 
 
