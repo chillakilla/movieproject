@@ -19,69 +19,16 @@
         <h4>MBTI 별로 선호하는 영화 랭킹은?</h4>
     </header>
 
-    <form class="searchbox"> <!--서치박스 코드 시작-->
-        <label>영화 찾기 : </label>
-        <input type="text" id="search-input" placeholder="원하는 영화 제목을 검색하세요.">
-        <button type="submit" id="search-btn">검색</button>
-    </form> <!--서치박스 코드 끝-->
+    <div class="searchbox-Container"> <!--서치박스 코드 시작-->
+        <form class="searchbox">
+            <label for="input-search">영화 찾기 : </label>
+            <input type="text" id="input-search" placeholder="영화 제목을 입력하세요.">
+            <button type="submit" id="submit-btn" class="search-btn">검색</button>
+        </form>
+    </div> <!--서치박스 코드 끝-->
 
-    <section class="card-list"> <!--카드리스트 섹션 코드 시작-->
-        <div class="movie-card">
-            <!-- <img src="https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="The Godfather"> -->
-            <h2 class="movie-title">The Godfather</h2>
-            <p>
-                about movie
-            </p>
-            <p>
-                MBTI Pick!
-            </p>
-            <h3>rating</h3>
-        </div>
-        <div class="movie-card">
-            <img src="..." alt="">
-            <h2 class="movie-title">movie title</h2>
-            <p>
-                about movie
-            </p>
-            <p class="text-pick">
-                MBTI Pick!
-            </p>
-            <h3>rating</h3>
-        </div>
-        <div class="movie-card">
-            <img src="..." alt="">
-            <h2 class="movie-title">movie title</h2>
-            <p>
-                about movie
-            </p>
-            <p class="text-pick">
-                MBTI Pick!
-            </p>
-            <h3>rating</h3>
-        </div>
-        <div class="movie-card">
-            <img src="..." alt="">
-            <h2 class="movie-title">movie title</h2>
-            <p>
-                about movie
-            </p>
-            <p class="text-pick">
-                MBTI Pick!
-            </p>
-            <h3>rating</h3>
-        </div>
-        <div class="movie-card">
-            <img src="..." alt="">
-            <h2 class="movie-title">movie title</h2>
-            <p>
-                about movie
-            </p>
-            <p class="text-pick">
-                MBTI Pick!
-            </p>
-            <h3>rating</h3>
-        </div>
-    </section> <!--카드리스트 섹션 코드 끝-->
+
+    <section id="movie-list" class="card-list"></section> 
 
 </body>
 
