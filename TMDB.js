@@ -10,17 +10,16 @@ const options = {
 
 
 
+function test(id) {
+    alert(id);
+}
+
+
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options)
     .then(response => response.json())
     .then(response => {
 
         const movies = response.results;
-
-        const movielist = [];
-
-        movielist = results;
-
-
 
         let temp_html = '';
 
@@ -28,7 +27,7 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', opti
         for (let i = 0; i < movies.length; i++) {
             const movie = movies[i];
             temp_html += `
-            <div class="movie-card"><img class="posterimg" src="https://image.tmdb.org/t/p/w342/${movie.poster_path}" alt="poster">
+            <div onclick="test(${movie.id})" class="movie-card" id="${movie.id}"><img class="posterimg" src="https://image.tmdb.org/t/p/w342/${movie.poster_path}" alt="poster">
                 <h2 class="movie-title">${movie.title}</h2>
                 <p class="overview">
                   ${movie.overview}
@@ -39,8 +38,8 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', opti
 
 
         document.getElementById('movie-list').innerHTML = temp_html;
+    
 
-            
     
         // let movieCards = '';
 
