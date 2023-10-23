@@ -10,16 +10,10 @@ const options = {
     }
 };
 
-
-
 function test(id) {
     alert(id);
 }
 
-
-
-
-// 현재 fetch는 처음에 영화 데이터를 받아오고 그것을 기준으로 html에 데이터를 채워넣는거죠(동적)
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options)
     .then(response => response.json())
     .then(response => {
@@ -28,22 +22,19 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', opti
 
         let temp_html = '';
 
-
         for (let i = 0; i < movies.length; i++) {
             const movie = movies[i];
             temp_html += `
-    <div onclick="test(${movie.id})" class="movie-card" id="${movie.id}"><img class="posterimg" src="https://image.tmdb.org/t/p/w342/${movie.poster_path}" alt="poster">
-    <h2 class="movie-title">${movie.title}</h2>
-    <p class="overview">
-    ${movie.overview}
-    </p>
-    <h3>${movie.vote_average}</h3>
-    </div>`;
+            <div onclick="test(${movie.id})" class="movie-card" id="${movie.id}"><img class="posterimg" src="https://image.tmdb.org/t/p/w342/${movie.poster_path}" alt="poster">
+                <h2 class="movie-title">${movie.title}</h2>
+                <p class="overview">
+                ${movie.overview}
+                </p>
+                <h3>${movie.vote_average}</h3>
+            </div>`;
         }
 
-
         document.getElementById('movie-list').innerHTML = temp_html;
-
 
         // forEach로 사용한 카드 리스트
         // let movieCards = '';
@@ -63,7 +54,10 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', opti
 
         // document.getElementById('movie-list').innerHTML = movieCards;
     })
+
     .catch(err => console.error(err));
+
+
 // 위에까지 html에 데이터 다 불러옴
 /*
 <form class="searchbox">
@@ -90,6 +84,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const input = document.querySelector('#input_search');
         const submit_btn = document.querySelector('#submit_btn');
 
+        // document.querySelector('#submit_btn'); 이걸 사용할 때,
+        // type = button은 내가 의도한 것과는 다르게 동작했다.
+
         const value = input.value.trim();
 
         if (value === '') {
@@ -102,29 +99,23 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 function searchMovies(value) {
-    console.log('god');
+    // console.log('god');
+    // searchMovies 가 value 값에 올바르게 작동하나 확인.
+
     fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options)
         .then(response => response.json())
         .then(response => {
             const movies = response.results;
             //(영화에 대한 정보들의 객체)의 배열
-            // 원하는 조건이 뭐죠?
-            // 영화의 제목이 필요하죠
-            // 뭐하고 비교할거죠? 유저가 작성한 value값하고
+            // 원하는 조건?
+            // 영화의 제목 필요
+            // 뭐하고 비교? 유저가 input한 value값하고
             // [1,5,6,7,87].filter(v => v > 5); filter 동작원리
             // => [6,7,87]
             const selectedMovies = movies.filter(movie => {
                 // movies를 순회하면서
                 // 참이 반환되면 그것을 빼와서 새로운 배열로 만든다
                 const title = movie.title;
-                console.log(movie);
-
-                // indexOf()
-                // 에러. 변수값이 정의가 제대로 안됐거나, 엑세스 불가능.
-                // TMDB.js: 128 Uncaught(in promise) ReferenceError: value is not defined
-                // at TMDB.js: 128: 13
-                // at Array.filter(<anonymous>)
-                // at TMDB.js:121:39
 
                 return (
                     value === title ||
@@ -134,7 +125,8 @@ function searchMovies(value) {
                     title.indexOf(value) !== -1
                 );
             });
-            console.log(selectedMovies);
+            // console.log(selectedMovies);
+            // selectedMovies 가 올바르게 작동하는지 확인.
 
             let temp_html = '';
 
@@ -151,18 +143,13 @@ function searchMovies(value) {
                 </div>`;
             }
 
-
+            // ${selectedMovies.id} 를 넣었었는데 오류가 떴었음.
+            // selectedMovies[i]; 가 movie 라고 지정해줬는데 저렇게 넣으면 오류가 나지...
+            // ${movie.id} 이렇게 수정하니 오류 수정됨.
             document.getElementById('movie-list').innerHTML = temp_html;
-
-
 
         });
 }
-
-// const form = document.querySelector('form.search_box');
-// form.addEventListener('submit',(event)=>{
-// event.preventDefault(); // 리로드를 안한다.
-
 
 
 
