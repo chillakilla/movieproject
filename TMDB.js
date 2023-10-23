@@ -90,23 +90,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const value = input.value.trim();
 
         if (value === '') {
-            fetchMoviesAndPopulate();
+            alert("검색어를 입력해주세요.");
+            
         } else {
             searchMovies(value);
         }
-
+        // input에 아무 것도 입력하지 않았을 시에 alert이 뜨는 걸 넣어볼까?
     })
 })
 
 function searchMovies(value) {
-    // console.log('god');
+    console.log('god');
     // searchMovies 가 value 값에 올바르게 작동하나 확인.
 
     fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options)
         .then(response => response.json())
         .then(response => {
             const movies = response.results;
-            //(영화에 대한 정보들의 객체)의 배열
+            // (영화에 대한 정보들의 객체)의 배열
             // 원하는 조건?
             // 영화의 제목 필요
             // 뭐하고 비교? 유저가 input한 value값하고
@@ -116,16 +117,41 @@ function searchMovies(value) {
                 // movies를 순회하면서
                 // 참이 반환되면 그것을 빼와서 새로운 배열로 만든다
                 const title = movie.title;
+                const entitle = movie.original_title;
+                // ko-KR로 받아온 title 은 검색이 됨.
+                // 그러나 원문으로(ex:대부 = T) (ex:godfather = F) 검색하면 안 됨.
+                // 이걸 해주기 위해선 어떻게 해야할까?
+                // 자비스 도와줘.(자비스 : ????)
 
                 return (
                     value === title ||
+                    // 일단은 title과 똑같이 original_title을 설정해봤지만 아무 것도 뜨지않음...
+                    // 뭐가 문제일까?
+                    // 위의 searchMovies(value)를 console.log를 찍어 확인한 결과.
+                    // input은 제대로 작동함.
+                    // 근데 그 밑에 빈 칸이 덜렁 뜸. info 가 뜨는 것 같은데..이 값은 처음 확장 시 평가되었습니다. 그 이후로 변경되었을 수 있습니다. 라고 함.
+                    // 분명 아까 진행할 때 봤던 문구 같은데..ㅠㅠ
+                    // 중복이라서 그런걸까?
+                    // 그런데 return 을 한 번 더 만든다고 해결될 것 같지는 않아.
+                    // return 역시 중복일 테니까. 
+                    // 근데 일단 const entitle, value === entitle 을 추가해도 기존 title 은 제대로 작동함. 이것마저 오류나거나 안 뜨지는 않음.
                     title.includes(value) ||
                     title.toLowerCase().includes(value.toLowerCase()) ||
                     title.toUpperCase().includes(value.toUpperCase()) ||
-                    title.indexOf(value) !== -1
+                    title.indexOf(value) !== -1 ||
+
+                    value === entitle || 
+                    entitle.includes(value) ||
+                    entitle.toLowerCase().includes(value.toLowerCase()) ||
+                    entitle.toUpperCase().includes(value.toUpperCase()) ||
+                    entitle.indexOf(value) !== -1 
                 );
+                    // 아 해결했다.
+                    // 근데 이건 내가 불성실하게 코드를 훑어본 탓이다.
+                    // 앞에 떡하니 title 붙여서 비교 수식을 넣은 게 보이는데, entitle 에도 똑같이 해준다는 걸 생각을 못했다.
+                    // value 값까지는 제대로 줬으나 비교할 수식이 없고, 검색된 것중 몇 개를 추려낼지(indexof) 입력을 안해줬으니 나올 턱이 있나.
             });
-            // console.log(selectedMovies);
+            console.log(selectedMovies);
             // selectedMovies 가 올바르게 작동하는지 확인.
 
             let temp_html = '';
